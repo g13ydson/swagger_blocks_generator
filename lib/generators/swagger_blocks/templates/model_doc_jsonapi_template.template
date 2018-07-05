@@ -1,0 +1,150 @@
+class <%= model.camelcase %>
+  include Swagger::Blocks
+
+  swagger_schema :<%= model.singularize.underscore %>_index_response do
+    property :data do
+      key :type, :array
+      items do
+        property :id do
+          key :type, :integer
+        end
+        property :type do
+          key :type, :string
+        end
+        property :attributes do
+          items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+            property :<%=attribute%> do
+              key :type, :string
+            end<% end %>
+          end
+        end
+      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+        property :relationships do
+          items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+            property :<%=relationship%> do
+              property :data do
+                property :id do
+                  key :type, :integer
+                end
+                property :type do
+                  key :type, :string
+                end
+              end
+            end<% end %>
+          end
+        end<% end %>
+      end
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_show_response do
+    property :data do
+      property :id do
+        key :type, :integer
+      end
+      property :type do
+        key :type, :string
+      end
+      property :attributes do
+        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+          property :<%=attribute%> do
+            key :type, :string
+          end<% end %>
+        end
+      end
+      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      property :relationships do
+        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+          property :<%=relationship%> do
+            property :data do
+              property :id do
+                key :type, :integer
+              end
+              property :type do
+                key :type, :string
+              end
+            end
+          end<% end %>
+        end
+      end<% end %>
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_create_response do
+    property :data do
+      property :id do
+        key :type, :integer
+      end
+      property :type do
+        key :type, :string
+      end
+      property :attributes do
+        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+          property :<%=attribute%> do
+            key :type, :string
+          end<% end %>
+        end
+      end
+      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      property :relationships do
+        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+          property :<%=relationship%> do
+            property :data do
+              property :id do
+                key :type, :integer
+              end
+              property :type do
+                key :type, :string
+              end
+            end
+          end<% end %>
+        end
+      end<% end %>
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_update_response do
+    property :data do
+      property :id do
+        key :type, :integer
+      end
+      property :type do
+        key :type, :string
+      end
+      property :attributes do
+        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+          property :<%=attribute%> do
+            key :type, :string
+          end<% end %>
+        end
+      end
+      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      property :relationships do
+        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+          property :<%=relationship%> do
+            property :data do
+              property :id do
+                key :type, :integer
+              end
+              property :type do
+                key :type, :string
+              end
+            end
+          end<% end %>
+        end
+      end<% end %>
+    end
+  end
+
+  swagger_schema :create_<%= model.singularize.underscore %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+    property :<%=item.name%> do
+      key :type, :string
+    end<% end %>
+  end
+
+  swagger_schema :update_<%= model.singularize.underscore %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+    property :<%=item.name%> do
+      key :type, :string
+    end<% end %>
+  end
+end

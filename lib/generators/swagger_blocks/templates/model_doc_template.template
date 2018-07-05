@@ -1,0 +1,55 @@
+class <%= model.camelcase %>
+  include Swagger::Blocks
+
+  swagger_schema :<%= model.singularize.underscore %>_index_response do
+    key :type, :array
+    items do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_show_response do
+    key :type, :array
+    items do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_create_response do
+    key :type, :array
+    items do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+
+  swagger_schema :<%= model.singularize.underscore %>_update_response do
+    key :type, :array
+    items do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+
+  swagger_schema :create_<%= model.singularize.underscore %> do
+    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+
+  swagger_schema :update_<%= model.singularize.underscore %> do
+    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
+  end
+end

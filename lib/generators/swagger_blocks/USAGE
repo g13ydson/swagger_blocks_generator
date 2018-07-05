@@ -1,0 +1,8 @@
+Description:
+    Creates swagger blocks files from models
+Example:
+    rails generate swagger_blocks:doc user
+
+    This will create:
+        controllers/docs/user.rb
+        controllers/docs/users_controller.rb
