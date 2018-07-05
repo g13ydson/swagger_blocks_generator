@@ -1,6 +1,7 @@
+
 # SwaggerBlocksGenerator
 
-    Creates swagger blocks files from your models
+   Creates swagger blocks files from your models
 
 ## Installation
 
@@ -21,8 +22,10 @@ Or install it yourself as:
 ## Usage
 
     $ rails g swagger_blocks:doc User
+    
+creates the documentation based on the return of gem fast_json_api https://github.com/Netflix/fast_jsonapi 
 
-    $ rails g swagger_blocks:doc User --fast_json_api #creates the documentation based on the return of gem fast_json_api https://github.com/Netflix/fast_jsonapi 
+    $ rails g swagger_blocks:doc User --fast_json_api 
 
 ## Contributing
 
