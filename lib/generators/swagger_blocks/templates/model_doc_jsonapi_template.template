@@ -136,15 +136,19 @@ class <%= model.camelcase %>
     end
   end
 
-  swagger_schema :create_<%= model.singularize.underscore %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
-    property :<%=item.name%> do
-      key :type, :string
-    end<% end %>
+  swagger_schema :create_<%= model.singularize.underscore %> do
+    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
   end
 
-  swagger_schema :update_<%= model.singularize.underscore %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
-    property :<%=item.name%> do
-      key :type, :string
-    end<% end %>
+  swagger_schema :update_<%= model.singularize.underscore %> do
+    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
+      property :<%=item.name%> do
+        key :type, :string
+      end<% end %>
+    end
   end
 end
