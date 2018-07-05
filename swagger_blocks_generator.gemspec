@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Gleydson Tavares"]
   spec.email         = ["tavares.gleydson@gmail.com"]
 
-  spec.summary       = "TESTE"
-  spec.description   = "Creates swagger blocks files from models"
+  spec.summary       = "Creates swagger_blocks files from your models"
   spec.homepage      = "https://github.com/g13ydson/swagger_blocks_generator"
   spec.license       = "MIT"
 
