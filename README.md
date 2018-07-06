@@ -1,5 +1,6 @@
 
 
+
 # SwaggerBlocksGenerator
 
    Creates swagger blocks files from your models
@@ -33,6 +34,7 @@ creates the documentation based on the return of gem fast_json_api https://githu
 
     $ rails g swagger_blocks:doc User
 
+*app/controllers/docs/user.rb*
 ```ruby
 class User
   include Swagger::Blocks
@@ -144,6 +146,7 @@ class User
   end
 end
 ```
+*app/controllers/docs/users_controller.rb*
 ```ruby
 class UsersController
   include Swagger::Blocks
@@ -321,6 +324,7 @@ end
 
 ## Example with --fast-json-api option
 
+*app/controllers/docs/user.rb*
 ```ruby
 class User
   include Swagger::Blocks
