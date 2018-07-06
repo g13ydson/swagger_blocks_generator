@@ -1,9 +1,9 @@
 
 
 
-# SwaggerBlocksGenerator
+# Swagger Blocks Generator
 
-   Creates swagger blocks files from your models
+   create swagger_blocks files through your models
 
 ## Installation
 
