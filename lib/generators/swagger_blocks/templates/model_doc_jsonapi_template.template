@@ -1,6 +1,8 @@
 class <%= model.camelcase %>
   include Swagger::Blocks
-
+  <% attributes =  model.camelcase.constantize.columns.collect %>
+  <% json_api_attributes =  "#{model.camelcase}Serializer".constantize.attributes_to_serialize %>
+  <% json_api_relationships =  "#{model.camelcase}Serializer".constantize.attributes_to_serialize %>
   swagger_schema :<%= model.singularize.underscore %>_index_response do
     property :data do
       key :type, :array
@@ -10,17 +12,16 @@ class <%= model.camelcase %>
         end
         property :type do
           key :type, :string
-        end
+        end<% if json_api_attributes %>
         property :attributes do
-          items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+          items do<% json_api_attributes.each do |attribute| %>
             property :<%=attribute%> do
               key :type, :string
             end<% end %>
           end
-        end
-      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+        end<% end %><% if json_api_relationships %>
         property :relationships do
-          items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+          items do<% json_api_relationships.keys.each do |relationship| %>
             property :<%=relationship%> do
               property :data do
                 property :id do
@@ -44,17 +45,16 @@ class <%= model.camelcase %>
       end
       property :type do
         key :type, :string
-      end
+      end<% if json_api_attributes %>
       property :attributes do
-        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+        items do<% json_api_attributes.each do |attribute| %>
           property :<%=attribute%> do
             key :type, :string
           end<% end %>
         end
-      end
-      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      end<% end %><% if json_api_relationships %>
       property :relationships do
-        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+        items do<% json_api_relationships.keys.each do |relationship| %>
           property :<%=relationship%> do
             property :data do
               property :id do
@@ -77,17 +77,16 @@ class <%= model.camelcase %>
       end
       property :type do
         key :type, :string
-      end
+      end<% if json_api_attributes %>
       property :attributes do
-        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+        items do<% json_api_attributes.each do |attribute| %>
           property :<%=attribute%> do
             key :type, :string
           end<% end %>
         end
-      end
-      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      end<% end %><% if json_api_relationships %>
       property :relationships do
-        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+        items do<% json_api_relationships.keys.each do |relationship| %>
           property :<%=relationship%> do
             property :data do
               property :id do
@@ -110,17 +109,16 @@ class <%= model.camelcase %>
       end
       property :type do
         key :type, :string
-      end
+      end<% if json_api_attributes %>
       property :attributes do
-        items do<% "#{model.camelcase}Serializer".constantize.attributes_to_serialize.keys.each do |attribute| %>
+        items do<% json_api_attributes.each do |attribute| %>
           property :<%=attribute%> do
             key :type, :string
           end<% end %>
         end
-      end
-      <% if "#{model.camelcase}Serializer".constantize.relationships_to_serialize %>
+      end<% end %><% if json_api_relationships %>
       property :relationships do
-        items do<% "#{model.camelcase}Serializer".constantize.relationships_to_serialize.keys.each do |relationship| %>
+        items do<% json_api_relationships.keys.each do |relationship| %>
           property :<%=relationship%> do
             property :data do
               property :id do
@@ -136,19 +134,19 @@ class <%= model.camelcase %>
     end
   end
 
-  swagger_schema :create_<%= model.singularize.underscore %> do
-    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
-      property :<%=item.name%> do
+  swagger_schema :create_<%= model.singularize.underscore %> do<% if attributes %>
+    property :<%= model.singularize.underscore  %> do<% attributes.each do |attribute| %>
+      property :<%=attribute.name%> do
         key :type, :string
       end<% end %>
-    end
+    end<% end %>
   end
 
-  swagger_schema :update_<%= model.singularize.underscore %> do
-    property :<%= model.singularize.underscore  %> do<% model.camelcase.constantize.columns.collect.each do |item| %>
-      property :<%=item.name%> do
+  swagger_schema :update_<%= model.singularize.underscore %> do<% if attributes %>
+    property :<%= model.singularize.underscore  %> do<% attributes.each do |attribute| %>
+      property :<%=attribute.name%> do
         key :type, :string
       end<% end %>
-    end
+    end<% end %>
   end
 end
